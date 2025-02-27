@@ -4,9 +4,24 @@ import { useId } from "react";
 import "./Cart.css";
 import { useCart } from "../hooks/useCart";
 export default function Cart() {
-
   const cartCheckboxId = useId();
-  const {clearCart} = useCart(); 
+  const { cart, clearCart, addToCart} = useCart();
+  function CartItem( {thumbnail, title, price, quantity, addToCart}){
+    return(
+      <li>
+            <img src={thumbnail} alt={thumbnail} />
+            <div>
+              <strong>{title}</strong> - {price}$
+            </div>
+            <footer>
+              <small>Qty: {quantity}</small>
+              <button onClick={addToCart}>+</button>
+              <small>Total: {quantity * price}$</small>
+            </footer>
+          </li>
+    )
+  }
+  const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
 
   return (
     <div>
@@ -17,17 +32,14 @@ export default function Cart() {
 
       <aside className="cart">
         <ul>
-          <li>
-            <img src="" alt="" />
-            <div>
-              <strong>Iphone</strong> - 1900 $
-            </div>
-            <footer>
-              <small>Qty: 1</small>
-            </footer>
-          </li>
+          {cart.map(product => (
+            <CartItem key={product.id}
+              addToCart={() => addToCart(product)}
+              {...product} />
+          ))}
         </ul>
-        <button onClick={() => clearCart()}>
+        <span>Total: {totalPrice}$</span>
+        <button onClick={clearCart}>
           <ClearCartIcon />
         </button>
       </aside>

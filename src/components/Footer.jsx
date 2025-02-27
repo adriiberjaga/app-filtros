@@ -6,14 +6,14 @@ export function Footer () {
     const { cart } = useCart()
   return (
     <footer className='footer'>
-      {
+      {/* {
         JSON.stringify
         (filter)
       } 
       {
         JSON.stringify
         (cart)
-      }
+      } */}
     </footer>
   )
 }

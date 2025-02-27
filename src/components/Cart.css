@@ -41,6 +41,7 @@
     position: absolute;
     right: 8px;
     top: 8px;
+    position: fixed;
     transition: all .3s ease;
     width: 32px;
     z-index: 9999;
@@ -53,4 +54,5 @@
   .cart-button ~ input:checked ~ .cart {
     height: 100%;
     display: block;
+    padding-top: 50px;
   }
